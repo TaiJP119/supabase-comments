@@ -96,10 +96,3 @@ The file contains a `<style>` block at the bottom. You can easily change the col
   --supa-theme-solid: #0f9d58; 
 }
 ```
-
-## 📄 License
-
-This project is open source and available under the [MIT License](https://www.google.com/search?q=LICENSE).
-
-```
-```
