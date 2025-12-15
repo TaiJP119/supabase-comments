@@ -58,134 +58,146 @@
     </div>
 
 </div>
+
 <style>
+  /* --- ⬇️ THEME CONFIGURATION ⬇️ --- */
 :root {
-  /* 🎨 CONFIG: Change your colors here! */
+  /* 1. Your Custom Gradient */
   --supa-theme-gradient: linear-gradient(to right, #4cbf30 0%, #0f9d58 100%);
+  
+  /* 2. Solid Color (Used for text, borders, and focus rings) */
   --supa-theme-solid: #0f9d58; 
+  
+  /* 3. Light Background (Used for the "Replying to..." box) */
   --supa-theme-light: #e8f5e9; 
+  
+  /* 4. Border Color for Light Box */
   --supa-theme-light-border: #c8e6c9; 
 }
-
-/* Core Layout */
-#supa-wrapper { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; max-width: 100%; margin: 0 auto; color: #333; }
+/* --- 1. CORE LAYOUT --- */
+#supa-wrapper {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  max-width: 100%;
+  margin: 0 auto;
+  color: #333;
+}
 #supa-wrapper * { box-sizing: border-box; }
+
 .supa-header { border-bottom: 2px solid #eee; margin-bottom: 20px; padding-bottom: 10px; }
 .supa-title { margin: 0; font-size: 1.5rem !important; font-weight: 600; color: #444; }
 
-/* Form Card */
-.supa-card { background: #fff; border-radius: 12px; padding: 25px; box-shadow: 0 8px 20px rgba(0,0,0,0.08); border: 1px solid #f0f0f0; margin-bottom: 30px; }
+/* --- 2. THE CARD & FORM --- */
+.supa-card {
+  background: #fff; border-radius: 12px; padding: 25px;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.08); border: 1px solid #f0f0f0;
+  transition: transform 0.2s; margin-bottom: 30px;
+}
 
 /* Reply Indicator */
-#replying-indicator { display: none; background: var(--supa-theme-light); color: var(--supa-theme-solid); padding: 10px 15px; border-radius: 8px; margin-bottom: 15px; font-size: 0.95rem; align-items: center; justify-content: space-between; border: 1px solid var(--supa-theme-light-border); }
-#cancel-reply-btn { background: none; border: none; color: var(--supa-theme-solid); font-weight: bold; cursor: pointer; font-size: 1.2rem; }
+#replying-indicator {
+    display: none; /* Hidden by default */
+    background: #eef6ff; color: #1d4ed8;
+    padding: 10px 15px; border-radius: 8px; margin-bottom: 15px;
+    font-size: 0.95rem; align-items: center; justify-content: space-between;
+    border: 1px solid #bfdbfe;
+}
+#cancel-reply-btn {
+    background: none; border: none; color: #1d4ed8; 
+    font-weight: bold; cursor: pointer; font-size: 1.2rem;
+}
 
 /* Emoji Bar */
 .emoji-bar { margin-bottom: 8px; display: flex; gap: 5px; flex-wrap: wrap; }
-.emoji-btn { background: #f8f9fa; border: 1px solid #dee2e6; border-radius: 6px; cursor: pointer; font-size: 1.1rem; padding: 4px 8px; transition: 0.2s; }
+.emoji-btn {
+    background: #f8f9fa; border: 1px solid #dee2e6; border-radius: 6px;
+    cursor: pointer; font-size: 1.1rem; padding: 4px 8px; transition: 0.2s;
+}
 .emoji-btn:hover { background: #e9ecef; transform: scale(1.1); }
 
 /* Inputs */
 .supa-top-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
 .supa-label-text { font-weight: 700; font-size: 1.1rem; color: #555; }
+
 .supa-identity-row { display: flex; gap: 15px; margin-bottom: 15px; }
 @media (max-width: 600px) { .supa-identity-row { flex-direction: column; } }
+
 .supa-input-group { position: relative; flex: 1; }
 .supa-icon { position: absolute; left: 12px; top: 50%; transform: translateY(-50%); color: #999; z-index: 2; }
-input.supa-input, textarea.supa-input { width: 100% !important; padding: 12px 12px 12px 35px !important; border: 1px solid #ddd !important; border-radius: 8px !important; background: #fdfdfd !important; font-size: 14px !important; outline: none !important; }
+
+input.supa-input, textarea.supa-input {
+  width: 100% !important; padding: 12px 12px 12px 35px !important;
+  border: 1px solid #ddd !important; border-radius: 8px !important;
+  background: #fdfdfd !important; font-size: 14px !important; outline: none !important;
+}
 textarea.supa-input { padding: 12px !important; resize: vertical; }
-input.supa-input:focus, textarea.supa-input:focus { border-color: var(--supa-theme-solid) !important; background: #fff !important; box-shadow: 0 0 0 3px rgba(15, 157, 88, 0.2) !important; }
+input.supa-input:focus, textarea.supa-input:focus {
+  border-color: #2196F3 !important; background: #fff !important;
+  box-shadow: 0 0 0 3px rgba(33, 150, 243, 0.1) !important;
+}
 
 /* Toggle Switch */
 .supa-toggle-switch { display: flex; align-items: center; cursor: pointer; font-size: 0.9rem; }
 .supa-toggle-switch input { display: none; }
-.supa-slider { width: 36px; height: 20px; background-color: #ddd; border-radius: 20px; position: relative; margin-right: 8px; transition: 0.3s; }
-.supa-slider::before { content: ""; position: absolute; height: 16px; width: 16px; left: 2px; bottom: 2px; background-color: white; border-radius: 50%; transition: 0.3s; }
-.supa-toggle-switch input:checked + .supa-slider { background-color: var(--supa-theme-solid); }
+.supa-slider {
+  width: 36px; height: 20px; background-color: #ddd; border-radius: 20px;
+  position: relative; margin-right: 8px; transition: 0.3s;
+}
+.supa-slider::before {
+  content: ""; position: absolute; height: 16px; width: 16px; left: 2px; bottom: 2px;
+  background-color: white; border-radius: 50%; transition: 0.3s;
+}
+.supa-toggle-switch input:checked + .supa-slider { background-color: #2196F3; }
 .supa-toggle-switch input:checked + .supa-slider::before { transform: translateX(16px); }
 
 /* Submit Button */
-.supa-btn { background: var(--supa-theme-gradient) !important; color: white !important; border: none !important; padding: 12px 25px !important; border-radius: 50px !important; font-weight: 600 !important; cursor: pointer; display: inline-flex; align-items: center; gap: 8px; font-size: 14px; margin-top: 10px; }
-.supa-btn:hover { transform: translateY(-1px); box-shadow: 0 4px 10px rgba(15, 157, 88, 0.4) !important; }
+.supa-btn {
+  background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%) !important;
+  color: white !important; border: none !important; padding: 12px 25px !important;
+  border-radius: 50px !important; font-weight: 600 !important; cursor: pointer;
+  display: inline-flex; align-items: center; gap: 8px; font-size: 14px; margin-top: 10px;
+}
+.supa-btn:hover { transform: translateY(-1px); box-shadow: 0 4px 10px rgba(79, 172, 254, 0.4) !important; }
 
-/* Comments List */
+/* --- 3. COMMENT LIST STYLES --- */
 .supa-comment-container { display: flex; flex-direction: column; gap: 15px; }
-.supa-comment-item { background: #f9f9f9; padding: 15px; border-radius: 10px; border: 1px solid #eee; position: relative; }
-.supa-reply-list { margin-left: 20px; border-left: 2px solid #e0e0e0; padding-left: 15px; margin-top: 15px; display: flex; flex-direction: column; gap: 15px; }
+
+.supa-comment-item {
+    background: #f9f9f9; padding: 15px; border-radius: 10px;
+    border: 1px solid #eee; position: relative;
+}
+
+/* Indentation for replies */
+.supa-reply-list {
+    margin-left: 20px; 
+    border-left: 2px solid #e0e0e0;
+    padding-left: 15px;
+    margin-top: 15px;
+    display: flex; flex-direction: column; gap: 15px;
+}
+
 .supa-header-comment { display: flex; justify-content: space-between; margin-bottom: 8px; }
 .supa-author { color: #333; font-weight: bold; font-size: 0.95rem; }
 .supa-date { font-size: 0.75rem; color: #888; }
 .supa-msg { color: #555; line-height: 1.5; font-size: 0.95rem; white-space: pre-wrap; }
+
 .supa-actions { margin-top: 10px; }
-.supa-btn-link { background: none; border: none; color: var(--supa-theme-solid); font-size: 0.8rem; cursor: pointer; padding: 0; font-weight: 600; }
+.supa-btn-link {
+    background: none; border: none; color: #2196F3;
+    font-size: 0.8rem; cursor: pointer; padding: 0; font-weight: 600;
+}
 .supa-btn-link:hover { text-decoration: underline; }
+
 #supa-status { margin-top: 10px; font-size: 0.9rem; }
 </style>
-
-<link rel="stylesheet" href="[https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css](https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css)">
-<script src="[https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2](https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2)"></script>
-
-<div id="supa-wrapper">
-  <div class="supa-header">
-    <h3 class="supa-title"><i class="fa-solid fa-comments"></i> Discussion</h3>
-  </div>
-
-  <div class="supa-card">
-    <div id="replying-indicator">
-        <span>Replying to <b id="replying-to-name">...</b></span>
-        <button type="button" id="cancel-reply-btn" title="Cancel Reply">×</button>
-    </div>
-
-    <form id="supa-form">
-      <input type="hidden" id="supa-parent-id">
-
-      <div class="supa-top-row">
-        <span class="supa-label-text">Leave a message</span>
-        <label class="supa-toggle-switch">
-          <input type="checkbox" id="anon-toggle">
-          <span class="supa-slider"></span>
-          <span class="supa-toggle-label">Anonymous</span>
-        </label>
-      </div>
-
-      <div class="supa-identity-row" id="supa-identity-row">
-        <div class="supa-input-group">
-          <i class="fa-solid fa-user supa-icon"></i>
-          <input type="text" id="supa-name" class="browser-default supa-input" placeholder="Name" required>
-        </div>
-        <div class="supa-input-group">
-          <i class="fa-solid fa-envelope supa-icon"></i>
-          <input type="email" id="supa-email" class="browser-default supa-input" placeholder="Email (Optional)">
-        </div>
-      </div>
-
-      <div id="emoji-toolbar" class="emoji-bar"></div>
-
-      <div class="supa-textarea-group">
-        <textarea id="supa-body" class="browser-default supa-input supa-area" placeholder="What are your thoughts?" rows="4" required></textarea>
-      </div>
-
-      <button type="submit" class="supa-btn">
-        <span>Post Comment</span>
-        <i class="fa-solid fa-paper-plane"></i>
-      </button>
-
-      <div id="supa-status"></div>
-    </form>
-  </div>
-
-  <div id="supa-comments-list" class="supa-comment-container"></div>
-</div>
 
 <script>
 document.addEventListener('DOMContentLoaded', async function() {
     
-    // --- CONFIGURATION ---
-    // Pulls data from _config.yml
-    const SUPABASE_URL = "<%= config.supabase.url %>"; 
-    const SUPABASE_KEY = "<%= config.supabase.key %>";
-    const EMOJI_LIST = [ '❤️', '🐾', '🔥', '🎄', '🤔', '🚀'];
-
+// --- ⬇️ CONFIGURATION: LOADED FROM _config.yml ⬇️ ---
+    const SUPABASE_URL = '<%= theme.supabase_comments.url %>'; 
+    const SUPABASE_KEY = '<%= theme.supabase_comments.key %>';
+    const EMOJI_LIST = [ '❤️', '🐾', 'ฅ^>⩊<^ฅ', '( °ヮ° ) ?', '🔥', '🎄', '⎛⎝ ≽  >  ⩊   < ≼ ⎠⎞', 'ദ്ദി ˉ͈̀꒳ˉ͈́ )✧'];
+    // --------------------------------------------------
     const _supabase = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
     
     // Elements
@@ -195,14 +207,16 @@ document.addEventListener('DOMContentLoaded', async function() {
     const msgInput = document.getElementById('supa-body');
     const nameInput = document.getElementById('supa-name');
     const emailInput = document.getElementById('supa-email');
+    const anonToggle = document.getElementById('anon-toggle');
+    
+    // New Elements (Required for Reply/Emoji features)
     const parentIdInput = document.getElementById('supa-parent-id');
     const replyIndicator = document.getElementById('replying-indicator');
     const replyNameDisplay = document.getElementById('replying-to-name');
     const cancelReplyBtn = document.getElementById('cancel-reply-btn');
     const emojiToolbar = document.getElementById('emoji-toolbar');
-    const anonToggle = document.getElementById('anon-toggle');
 
-    // Emoji Logic
+    // 1. Emoji Toolbar Builder
     if(emojiToolbar) {
         EMOJI_LIST.forEach(emoji => {
             const btn = document.createElement('button');
@@ -214,7 +228,7 @@ document.addEventListener('DOMContentLoaded', async function() {
         });
     }
 
-    // Anon Toggle Logic
+    // 2. Anon Toggle
     if(anonToggle) {
         anonToggle.addEventListener('change', function() {
             const identityRow = document.getElementById('supa-identity-row');
@@ -231,33 +245,34 @@ document.addEventListener('DOMContentLoaded', async function() {
         });
     }
 
-    // Reply Logic
+    // 3. Reply Logic
     window.setReply = function(id, name) {
-        parentIdInput.value = id;
-        replyNameDisplay.textContent = name;
-        replyIndicator.style.display = 'flex';
+        if(parentIdInput) parentIdInput.value = id;
+        if(replyNameDisplay) replyNameDisplay.textContent = name;
+        if(replyIndicator) replyIndicator.style.display = 'flex';
         msgInput.focus();
         form.scrollIntoView({ behavior: 'smooth' });
     };
 
     if(cancelReplyBtn) {
         cancelReplyBtn.onclick = function() {
-            parentIdInput.value = '';
-            replyIndicator.style.display = 'none';
+            if(parentIdInput) parentIdInput.value = '';
+            if(replyIndicator) replyIndicator.style.display = 'none';
         };
     }
 
-    // Tree Renderer (Recursive)
+    // 4. Recursive Comment Renderer
     function renderCommentTree(comments, container) {
         if (!comments || comments.length === 0) return;
+
         comments.forEach(comment => {
             const date = new Date(comment.created_at).toLocaleDateString();
             const safeName = comment.name.replace(/</g, "&lt;");
             const safeMsg = comment.message.replace(/</g, "&lt;");
 
-            const div = document.createElement('div');
-            div.className = 'supa-comment-item';
-            div.innerHTML = `
+            const commentDiv = document.createElement('div');
+            commentDiv.className = 'supa-comment-item';
+            commentDiv.innerHTML = `
                 <div class="supa-header-comment">
                     <span class="supa-author">${safeName}</span>
                     <span class="supa-date">${date}</span>
@@ -265,8 +280,10 @@ document.addEventListener('DOMContentLoaded', async function() {
                 <div class="supa-msg">${safeMsg}</div>
                 <div class="supa-actions">
                     <button class="supa-btn-link" onclick="setReply('${comment.id}', '${safeName}')">Reply</button>
-                </div>`;
-            container.appendChild(div);
+                </div>
+            `;
+
+            container.appendChild(commentDiv);
 
             if (comment.children && comment.children.length > 0) {
                 const replyList = document.createElement('div');
@@ -277,7 +294,7 @@ document.addEventListener('DOMContentLoaded', async function() {
         });
     }
 
-    // Data Processing
+    // 5. Data Processing
     function buildTree(data) {
         const map = {};
         const tree = [];
@@ -292,19 +309,31 @@ document.addEventListener('DOMContentLoaded', async function() {
         return tree;
     }
 
-    // Load Comments
+    // 6. Load Comments
     async function loadComments() {
         const currentSlug = window.location.pathname;
-        const { data, error } = await _supabase.from('comments')
-            .select('*').eq('slug', currentSlug).order('created_at', { ascending: true });
+        const { data, error } = await _supabase
+            .from('comments')
+            .select('*')
+            .eq('slug', currentSlug)
+            .order('created_at', { ascending: true });
 
-        commentsList.innerHTML = '';
-        if (error) console.error(error);
-        else if (!data || data.length === 0) commentsList.innerHTML = '<p style="text-align:center; color:#999; margin-top:20px;">No comments yet.</p>';
-        else renderCommentTree(buildTree(data), commentsList);
+        commentsList.innerHTML = ''; 
+
+        if (error) {
+            console.error(error);
+            return;
+        }
+
+        if (!data || data.length === 0) {
+            commentsList.innerHTML = '<p style="text-align:center; color:#999; margin-top:20px;">No comments yet.</p>';
+        } else {
+            const tree = buildTree(data);
+            renderCommentTree(tree, commentsList);
+        }
     }
 
-    // Submit Handler
+    // 7. Submit Logic
     form.addEventListener('submit', async function(e) {
         e.preventDefault();
         const btn = form.querySelector('button[type="submit"]');
@@ -317,8 +346,10 @@ document.addEventListener('DOMContentLoaded', async function() {
             email: emailInput.value,
             message: msgInput.value,
             slug: window.location.pathname,
-            parent_id: parentIdInput.value || null
+            parent_id: parentIdInput ? parentIdInput.value : null 
         };
+
+        if(payload.parent_id === "") payload.parent_id = null;
 
         const { error } = await _supabase.from('comments').insert([ payload ]);
 
@@ -327,14 +358,18 @@ document.addEventListener('DOMContentLoaded', async function() {
         } else {
             statusDiv.innerHTML = `<span style="color:green">Success!</span>`;
             msgInput.value = '';
-            parentIdInput.value = '';
-            replyIndicator.style.display = 'none';
+            
+            // Reset Reply State
+            if(parentIdInput) parentIdInput.value = '';
+            if(replyIndicator) replyIndicator.style.display = 'none';
             if(anonToggle && anonToggle.checked) {
                 anonToggle.checked = false;
                 anonToggle.dispatchEvent(new Event('change'));
             }
-            loadComments();
+
+            loadComments(); 
         }
+        
         btn.innerHTML = originalText;
         btn.disabled = false;
     });
