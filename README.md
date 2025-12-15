@@ -1,6 +1,7 @@
 
 # Hexo Supabase Comments
 Link: https://taijinpei.info/2025/12/15/Supabase-x-Hexo/
+
 A lightweight, real-time comment system for Hexo themes powered by [Supabase](https://supabase.com/). 
 
 Features:
